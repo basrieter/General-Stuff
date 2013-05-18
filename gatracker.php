@@ -28,6 +28,7 @@ class GaTracker
         $this->UtmCc = "";
         $this->IsEvent = false;
         $this->EventData = "";
+        $this->PageTitle = "(not set)";
         
         $this->ClientIp = $_SERVER["REMOTE_ADDR"];
         $this->ServerName = $this->GetServerName();
@@ -86,6 +87,10 @@ class GaTracker
         
         // now update the cookie
         $this->UtmCc = $this->GetCookie();
+    }
+    
+    function SetPageTitle($pageTitle) {
+        $this->PageTitle = $pageTitle;
     }
     
     /**
@@ -259,6 +264,7 @@ class GaTracker
                 , "utmhn"   => $this->ServerName
                 , "utmr"    => $this->Referer
                 , "utmp"    => $this->RequestedUrl
+                , "utmdt"   => $this->PageTitle
                 , "utme"    => $this->EventData
                 , "utmt"    => "event"
                 , "utmac"   => $this->GaAccount
@@ -274,6 +280,7 @@ class GaTracker
                 , "utmhn"   => $this->ServerName
                 , "utmr"    => $this->Referer
                 , "utmp"    => $this->RequestedUrl
+                , "utmdt"   => $this->PageTitle
                 , "utmac"   => $this->GaAccount
                 #, "utmvid" => CreateVisitorId()
                 , "utmip"   => $this->ClientIp
